@@ -1,0 +1,32 @@
+import pymupdf4llm
+import os
+import glob
+
+
+def convert_pdfs_to_markdown(data_folder):
+    pdf_files = glob.glob(os.path.join(data_folder, "*.pdf"))
+
+    while pdf_files:
+        for pdf_file in pdf_files:
+            try:
+                # NOTE: PDFをマークダウンに変換
+                md_text = pymupdf4llm.to_markdown(pdf_file)
+
+                base_name = os.path.splitext(os.path.basename(pdf_file))[0]
+                md_file = os.path.join(data_folder, f"{base_name}.md")
+
+                with open(md_file, "w", encoding="utf-8") as output:
+                    output.write(md_text)
+
+                print(f"変換完了: {pdf_file} → {md_file}")
+
+                pdf_files.remove(pdf_file)
+
+            except Exception as e:
+                print(f"エラーが発生しました: {pdf_file} - {e}")
+                pdf_files.remove(pdf_file)
+
+
+if __name__ == "__main__":
+    data_folder = "./data/"
+    convert_pdfs_to_markdown(data_folder)
