@@ -1,2 +1,3 @@
-# -llama-3-elyza-jp-8b-ft-skud
-このモデルはLlama-3-ELYZA-JP-8Bを農業白書を使ってファインチューニングしたものです。
+# AgriWhitePaperRAG
+
+このモデルは Llama-3-ELYZA-JP-8B と農業白書を使って RAG チャットボットを作ってみています。
